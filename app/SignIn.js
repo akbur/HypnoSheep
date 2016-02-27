@@ -8,6 +8,13 @@ var request = require('superagent');
 //var Auth = require('./AuthService');
 //var path = require('./index');
 
+import RaisedButton from 'material-ui/lib/raised-button';
+import TextField from 'material-ui/lib/text-field';
+
+const buttonStyle = {
+  margin: 12,
+};
+
 var SignIn = React.createClass({
   getInitialState: function() {
     return {
@@ -69,26 +76,26 @@ var SignIn = React.createClass({
   render: function() {
     return (
       <div>
-        <h1>Sign in</h1>
+        <h3>Sign in</h3>
         <form className="userForm">
           {/*<Link to="/projects"></Link>*/}
-          <input 
-            type="username"
-            placeholder="username"
+          
+          <TextField
+            hintText="Username"
             value={this.state.username}
             onChange={this.onUserChange}
-          />
-          <br />
-          <input 
+          /><br />
+
+          <TextField
+            hintText="Password"
             type="password"
-            placeholder="password"
             value={this.state.password}
             onChange={this.onPassChange}
-          />
-          <br />
-          <input
-            type="submit"
-            value="Sign In"
+          /><br />
+
+          <RaisedButton
+            label="Sign In"
+            style={buttonStyle}
             onClick={this.handleUserSubmit}
           />
         </form>
