@@ -1,13 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, Link } from 'react-router'; 
+import { Link } from 'react-router';
 
 // Header renders Home and Sign Out links
 // Space rendered between Home and SignOut until CSS applied
 const Header = React.createClass({
   render() {
     return (
-      <nav className='app-header'>
+      <nav className="app-header">
         <Home user={this.props.user} /> {'  '}
         <SignOut />
       </nav>
@@ -28,7 +27,7 @@ const Home = React.createClass({
 // handleSignOut will be updated to remove token
 const SignOut = React.createClass({
   handleSignOut() {
-    console.log("You are now signed out");
+    console.log('You are now signed out');
   },
   render() {
     return (

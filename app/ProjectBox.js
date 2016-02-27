@@ -45,14 +45,14 @@ const ProjectBox = React.createClass({
   },
 
   render() {
-    // by having onCommentSubmit={this.handleProjectSubmit} in the ProjectForm tag, we are able to pass
-    // ProjectBox's handleProjectSubmit method to ProjectForm on the this.props object. ProjectBox
-    // i.e. this.props.handleProjectSubmit
+    // by having onCommentSubmit={this.handleProjectSubmit} in the ProjectForm tag, we are
+    // able to pass ProjectBox's handleProjectSubmit method to ProjectForm on the this.props
+    // object. ProjectBox i.e. this.props.handleProjectSubmit
     return (
       <div className="projectBox">
         <h1>Projects</h1>
         <ProjectForm onProjectSubmit={this.handleProjectSubmit} />
-        <ProjectList data={this.state.data} loadProjectsFromServer={this.loadProjectsFromServer}/>
+        <ProjectList data={this.state.data} loadProjectsFromServer={this.loadProjectsFromServer} />
       </div>
     );
   }
@@ -67,7 +67,7 @@ const ProjectForm = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    let projectName = this.state.name.trim();
+    const projectName = this.state.name.trim();
     if (!projectName) {
       return;
     }
@@ -94,11 +94,10 @@ const ProjectList = React.createClass({
     // render returns an array of Project components by mapping the project objects
     // stored in this.props.data
     if (this.props.data.length === 0) {
-      return <div>You haven't added any projects yet.</div>
+      return <div>You haven't added any projects yet.</div>;
     }
     const { data, loadProjectsFromServer } = this.props;
-    
-      const projectNodes = data.map((project) => {
+    const projectNodes = data.map((project) => {
       const deleteProject = () => {
         request
           .delete(`/api/projects/${project._id}`)
@@ -125,7 +124,5 @@ const ProjectList = React.createClass({
     );
   }
 });
-    
-    
 
 export default ProjectBox;

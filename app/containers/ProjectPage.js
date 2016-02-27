@@ -11,12 +11,18 @@ const ProjectPage = React.createClass({
     };
   },
 
+  componentDidMount() {
+    // Sends get request when component is first rendered, loading any resources already
+    // stored for the project
+    this.getResources();
+  },
+
   getResources() {
     request
       .get(`/api/resources/${this.props.params.id}`)
       .end((err, resp) => {
-        if(!err) {
-          this.setState({data: (resp.body)});
+        if (!err) {
+          this.setState({ data: (resp.body) });
         } else {
           console.error(err);
         }
@@ -31,20 +37,13 @@ const ProjectPage = React.createClass({
       .post('/api/resources')
       .send(resource)
       .end((err, resp) => {
-        if(!err) {
+        if (!err) {
           console.log('Success!');
-          this.setState({data: this.state.data.concat([resp.body])});
+          this.setState({ data: this.state.data.concat([resp.body]) });
         } else {
           console.error(err);
         }
       });
-    },
-
-
-  componentDidMount() {
-    // Sends get request when component is first rendered, loading any resources already
-    // stored for the project
-    this.getResources();
   },
 
   // ResourceBox's handleResourceSubmit method is passed to ResourceForm via this.props object
