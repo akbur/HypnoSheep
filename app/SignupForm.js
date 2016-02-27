@@ -2,6 +2,14 @@ import React from 'react';
 import request from 'superagent';
 import { browserHistory } from 'react-router';
 
+import RaisedButton from 'material-ui/lib/raised-button';
+import TextField from 'material-ui/lib/text-field';
+
+const buttonStyle = {
+  margin: 12,
+};
+
+
 const SignupForm = React.createClass({
   getInitialState() {
     return {
@@ -15,24 +23,25 @@ const SignupForm = React.createClass({
       <div>
         <h3>Sign Up</h3>
         <form 
-          className="signupForm" 
-          onSubmit={(event) => event.preventDefault()}>
-          
-          <label>Username: </label>
-          <input
+          className="signupForm"
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <TextField
+            hintText="Username"
             value={this.state.username}
             onChange={(event) => this.setState({username: event.target.value})}
-          />
+          /><br />
 
-          <label>Password: </label>
-          <input 
+          <TextField
+            hintText="Password"
+            type="password"
             value={this.state.password}
             onChange={(event) => this.setState({password: event.target.value})}
-          />
+          /><br />
 
-          <input 
-            type="submit" 
-            value="Sign Up"
+          <RaisedButton
+            label="Sign Up"
+            style={buttonStyle}
             onClick={this.onSignupSubmit}
           />
         </form>
