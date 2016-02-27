@@ -1,12 +1,12 @@
-//import React from 'react';
+// import React from 'react';
 // import request from 'superagent';
 // import Auth from './AuthService';
-import { browserHistory } from 'react-router'
-var React = require('react');
-var request = require('superagent');
-//var LoginAction = require('./LoginActions');
-//var Auth = require('./AuthService');
-//var path = require('./index');
+import { browserHistory } from 'react-router';
+const React = require('react');
+const request = require('superagent');
+// const LoginAction = require('./LoginActions');
+// const Auth = require('./AuthService');
+// const path = require('./index');
 
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
@@ -15,32 +15,56 @@ const buttonStyle = {
   margin: 12,
 };
 
-var SignIn = React.createClass({
-  getInitialState: function() {
+const SignIn = React.createClass({
+  getInitialState() {
     return {
       username: '',
       password: ''
-    }
+    };
   },
 
-  componentDidMount: function() {
-    //check local storage for jwt
-    //window.sessionStorage.token
+  componentDidMount() {
+    // check local storage for jwt
+    // window.sessionStorage.token
   },
 
-  auth: function(username, password) {
-    var user = {
-      username: username,
-      password: password
+  onUserChange(e) {
+    this.setState({ username: e.target.value });
+  },
+
+  onPassChange(e) {
+    this.setState({ password: e.target.value });
+  },
+
+  loginUser(userId, jwt) {
+    browserHistory.push(`/projects/${userId}`);
+    localStorage.setItem('jwt', jwt);
+    console.log(window);
+  },
+
+  handleUserSubmit(e) {
+    e.preventDefault();
+
+    this.auth(this.state.username, this.state.password)
+      .catch(err => {
+        console.log('error! ', err);
+      });
+    this.setState({ username: '', password: '' });
+  },
+
+  auth(username, password) {
+    const user = {
+      username,
+      password
     };
     request.post('auth/signin').send(user).end((err, res) => {
       if (err || !res.ok) {
         console.log(err);
-      } else if ( res.text === 'user not found' || res.text === 'passwords dont match'){
+      } else if (res.text === 'user not found' || res.text === 'passwords dont match') {
         console.log(res.text);
       } else {
-        var userId = res.body.user._id;
-        var jwt = JSON.parse(res.text);
+        const userId = res.body.user._id;
+        const jwt = JSON.parse(res.text);
         console.log(res);
         console.log(Date.now());
         this.loginUser(userId, jwt.token);
@@ -49,39 +73,18 @@ var SignIn = React.createClass({
     });
   },
 
-  loginUser: function(userId, jwt) {
-    browserHistory.push('/projects/' + userId);
-    localStorage.setItem('jwt', jwt);
-    console.log(window);
-  },
-
-  handleUserSubmit: function(e) {
-    e.preventDefault();
-
-    this.auth(this.state.username, this.state.password)
-      .catch(err => {
-          console.log('error! ', err);
-        });
-    this.setState({username: '', password: ''});
-  },
-
-  onUserChange: function(e) {
-    this.setState({username: e.target.value});
-  },
-
-  onPassChange: function(e) {
-    this.setState({password: e.target.value});
-  },
-
-  render: function() {
+  render() {
     return (
       <div>
         <h3>Sign in</h3>
-        <form className="userForm">
-          {/*<Link to="/projects"></Link>*/}
-          
+        <form
+          className="userForm"
+        >
+          {/* <Link to="/projects"></Link> */}
+
           <TextField
             hintText="Username"
+            type="username"
             value={this.state.username}
             onChange={this.onUserChange}
           /><br />
@@ -95,12 +98,13 @@ var SignIn = React.createClass({
 
           <RaisedButton
             label="Sign In"
+            type="submit"
             style={buttonStyle}
             onClick={this.handleUserSubmit}
           />
         </form>
       </div>
-    )
+    );
   }
 });
 
