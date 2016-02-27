@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactRouter from 'react-router';
 
 const LandingPage = React.createClass({
   render() {
@@ -36,12 +34,12 @@ const GetStarted = React.createClass({
           <li>Add comments, tag the links that helped, remove the ones that didn't</li>
         </ul>
         <h3>Start searching more effectively today!</h3>
-        <a href='/signup'>Sign Up</a>
-        <a href='/signin'>Sign In</a>
+        <a href="/signup">Sign Up</a>
+        <a href="/signin">Sign In</a>
       </div>
     );
   }
-})
+});
 
 export default LandingPage;
 

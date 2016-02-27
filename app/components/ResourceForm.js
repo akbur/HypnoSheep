@@ -2,10 +2,10 @@ import React from 'react';
 
 const ResourceForm = React.createClass({
   getInitialState() {
-    return {url: ''};
+    return { url: '' };
   },
   handleResourceChange(e) {
-    this.setState({url: e.target.value});
+    this.setState({ url: e.target.value });
   },
   handleSubmit(e) {
     e.preventDefault();
@@ -13,8 +13,8 @@ const ResourceForm = React.createClass({
     if (!resource) {
       return;
     }
-    this.props.onResourceSubmit({url: resource});
-    this.setState({url: ''});
+    this.props.onResourceSubmit({ url: resource });
+    this.setState({ url: '' });
   },
   render() {
     return (
