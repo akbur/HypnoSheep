@@ -66,5 +66,18 @@ module.exports = {
     .then(function(users) {
       res.json(users);
     })
+  }, 
+
+  deleteUser: function(req, res) {
+    User.remove({
+      _id: req.params.userId
+    })
+    .then(function(){
+      return res.end('User deleted.');
+    })
+    .catch(function(){
+      return console.log('Error deleting user.');
+    })
   }
+
 };
