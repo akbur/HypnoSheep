@@ -4,6 +4,13 @@ import { browserHistory } from 'react-router';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
 import Paper from 'material-ui/lib/paper';
+import WebFont from 'webfontloader';
+
+WebFont.load({
+  google: {
+    families: ['Roboto:400,700:latin']
+  }
+});
 
 const SignIn = React.createClass({
   getInitialState() {
@@ -72,7 +79,10 @@ const SignIn = React.createClass({
       margin: 12,
     };
     const backgroundStyle = {
-      "text-align": "center",
+      'textAlign': 'center',
+    };
+    const textStyle = {
+      fontFamily: 'Roboto'
     };
     const paperStyle = {
       height: '100%',
@@ -85,7 +95,7 @@ const SignIn = React.createClass({
     };
     return (
       <div style={backgroundStyle}>
-        <h3>Sign In</h3>
+        <h1 style={textStyle}>Sign In</h1>
         <form className="userForm">
           <TextField
             hintText="Username"

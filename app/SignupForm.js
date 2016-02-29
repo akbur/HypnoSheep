@@ -4,6 +4,13 @@ import { browserHistory } from 'react-router';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
 import Paper from 'material-ui/lib/paper';
+import WebFont from 'webfontloader';
+
+WebFont.load({
+  google: {
+    families: ['Roboto:400,700:latin']
+  }
+});
 
 const SignupForm = React.createClass({
   getInitialState() {
@@ -86,6 +93,9 @@ const SignupForm = React.createClass({
     const backgroundStyle = {
       textAlign: 'center'
     };
+    const textStyle = {
+      fontFamily: 'Roboto'
+    };
     const paperStyle = {
       height: '100%',
       width: '15%',
@@ -97,7 +107,7 @@ const SignupForm = React.createClass({
     };
     return (
       <div style={backgroundStyle}>
-        <h3>Sign Up</h3>
+        <h1 style={textStyle}>Sign Up</h1>
         <form
           className="signupForm"
           onSubmit={(event) => event.preventDefault()}
